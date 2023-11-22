@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SPE",
+  "name": "Spotify Playlist Enhancer",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +21,17 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description": "A better way to manager you spotify playlists through chrome extension",
+  "permissions": ["tabs", "<all_urls>"],
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "logo192.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["static/js/bundle.js"]
+    }
+  ]
 }
