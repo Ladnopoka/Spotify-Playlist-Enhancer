@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reloadddd.
+          Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -17,6 +17,14 @@ function App() {
         >
           Learn React
         </a>
+        <div className="App-buttons">
+          <button onClick={() => alert('Create Playlist button clicked')}>
+            Create Playlist
+          </button>
+          <button onClick={() => alert('View Playlists button clicked')}>
+            View Playlists
+          </button>
+        </div>
       </header>
     </div>
   );
