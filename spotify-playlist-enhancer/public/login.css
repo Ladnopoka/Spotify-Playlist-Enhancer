@@ -1,7 +1,8 @@
 body {
-    background-color: #181818; /* Spotify dark background */
-    color: white;
-    font-family: Arial, sans-serif;
+    background-image: url('/Artificial-Monopoly.jpg'); /* Adjust the path as necessary */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
     padding: 10px;
     text-align: center;
 }
