@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('myButton2').addEventListener('click', function () {
     var musicPlayerPopup = document.getElementById('musicPlayerPopup');
+    var songList = document.getElementById('songList');
+
+    // Clear the existing songs from the list
+    while (songList.firstChild) {
+      songList.removeChild(songList.firstChild);
+   }
+
     if(musicPlayerPopup.style.display === 'none') {
         musicPlayerPopup.style.display = 'block';
         // Load and list music files here, setting them as the source for the audio player
