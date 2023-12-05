@@ -1,4 +1,4 @@
-import './popup.css';
+//import './popup.css';
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('myButton').addEventListener('click', function () {
