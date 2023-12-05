@@ -1,0 +1,44 @@
+body {
+    background-color: #181818; /* Spotify dark background */
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    text-align: center;
+}
+
+.container {
+    max-width: 300px;
+    margin: auto;
+    padding-top: 50px;
+}
+
+h1 {
+    color: #1DB954; /* Spotify green */
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input[type=email], input[type=password], input[type=text] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: none;
+}
+
+button {
+    width: 100%;
+    background-color: #1DB954; /* Spotify green */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1ed760; /* Lighter green on hover */
+}

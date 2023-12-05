@@ -1,0 +1,21 @@
+body {
+    background-color: #181818; /* Spotify dark background */
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+  }
+  
+  button {
+    background-color: #1DB954; /* Spotify green */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #1ed760; /* Lighter green on hover */
+  }
