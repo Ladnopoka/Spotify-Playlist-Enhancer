@@ -5,9 +5,28 @@ document.addEventListener('DOMContentLoaded', function () {
     chrome.tabs.create({ url: 'login.html' });
   });
   document.getElementById('myButton2').addEventListener('click', function () {
-    // Code for "My Playlists" button
+    var musicPlayerPopup = document.getElementById('musicPlayerPopup');
+    if(musicPlayerPopup.style.display === 'none') {
+        musicPlayerPopup.style.display = 'block';
+        // Load and list music files here, setting them as the source for the audio player
+    } else {
+        musicPlayerPopup.style.display = 'none';
+    }
   });
   document.getElementById('myButton3').addEventListener('click', function () {
     // Code for "Recent Playlists" button
   });
 });
+
+// Function to add songs to the popup
+function addSongToPopup(songPath) {
+  var songList = document.getElementById('songList');
+  var songItem = document.createElement('li');
+  songItem.textContent = songPath; // Use the file name or some identifier
+  songItem.onclick = function() {
+      var audioPlayer = document.getElementById('audioPlayer');
+      audioPlayer.src = songPath; // Set the path as the source for the audio player
+      audioPlayer.play(); // Play the song
+  };
+  songList.appendChild(songItem);
+}

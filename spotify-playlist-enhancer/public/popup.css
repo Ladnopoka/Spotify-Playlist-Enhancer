@@ -19,3 +19,9 @@ body {
   button:hover {
     background-color: #1ed760; /* Lighter green on hover */
   }
+
+  #musicPlayerPopup {
+    display: none;
+    position: absolute;
+    /* Additional styling */
+}
