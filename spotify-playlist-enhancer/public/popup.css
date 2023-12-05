@@ -1,9 +1,12 @@
 body {
-    background-color: #181818; /* Spotify dark background */
-    color: white;
-    font-family: Arial, sans-serif;
-    padding: 10px;
-  }
+  position: relative; /* Add this line to ensure absolute positioning within the body */
+  background-color: #181818;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  width: 300px; /* Set a specific width for the body */
+  overflow: visible; /* Ensure that overflow content is visible */
+}
   
   button {
     background-color: #1DB954; /* Spotify green */
@@ -23,5 +26,10 @@ body {
   #musicPlayerPopup {
     display: none;
     position: absolute;
+    left: 0; /* Align to the left or as desired */
+    top: 100%; /* Position it below the buttons */
+    width: 100%; /* Match the width of the parent or as desired */
+    /*background-color: #282828; Match Spotify's secondary background color */
+    z-index: 10; /* Ensure it's above other elements */
     /* Additional styling */
 }
