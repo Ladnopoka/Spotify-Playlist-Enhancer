@@ -1,32 +1,37 @@
 body {
-    background-image: url('/Artificial-Monopoly.jpg'); /* Adjust the path as necessary */
+    background-image: url('/spotify-wallpaper.jpg'); /* Adjust the path as necessary */
     background-size: cover; /* Cover the entire page */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     padding: 10px;
     text-align: center;
+    color: #ffffff; /* Make text color white for better contrast */
 }
 
 .container {
     max-width: 300px;
     margin: auto;
     padding-top: 50px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    border-radius: 20px; /* Rounded corners for the container */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Shadow for depth */
 }
 
-h1 {
+h1, h2 {
     color: #1DB954; /* Spotify green */
-}
-
-h2 {
-    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000000; /* Text shadow for better readability */
 }
 
 input[type=email], input[type=password], input[type=text] {
-    width: 100%;
+    width: calc(100%); /* Subtract the total horizontal padding from the width */
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 20px;
-    border: none;
+    border: 1px solid #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 button {
@@ -38,6 +43,7 @@ button {
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Shadow for depth */
 }
 
 button:hover {
