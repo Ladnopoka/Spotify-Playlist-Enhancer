@@ -46,32 +46,35 @@ body {
   list-style: none;
 }
 
-.song-item {
-  cursor: pointer;
-  background-color: #282828;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  margin-bottom: 5px; /* Adds space between items */
-  transition: background-color 0.3s;
-  width: 100%; /* Full width */
-  text-align: left; /* Align text to the left */
-}
-
 /* Style for the audio player container */
 .player-container {
   width: 100%; /* Full width */
   margin-bottom: 20px; /* Space below the player */
 }
 
-/* Style for the song list */
+/* Style for the song list container */
 .song-list-container {
   width: 100%; /* Full width */
-  list-style: armenian;
+  list-style: none; /* Removes the default list styling */
   padding: 0;
   margin: 0;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
 }
 
+/* Style for each song item */
+.song-item {
+  cursor: pointer;
+  background-color: #282828; /* Spotify-like item background color */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Top/bottom and left/right padding */
+  border-radius: 20px; /* Rounded corners */
+  margin: 5px 0; /* Margin between items */
+  width: calc(100% - 40px); /* Full width minus padding */
+  text-align: center; /* Center text */
+  transition: background-color 0.3s; /* Smooth background color transition on hover */
+}
 
 .song-item:hover {
   background-color: #1ed760; /* Lighter green on hover */
