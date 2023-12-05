@@ -1,5 +1,5 @@
 body {
-    background-image: url('/spotify-wallpaper.jpg'); /* Adjust the path as necessary */
+    background-image: url('/images/spotify-wallpaper.jpg'); /* Adjust the path as necessary */
     background-size: cover; /* Cover the entire page */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */

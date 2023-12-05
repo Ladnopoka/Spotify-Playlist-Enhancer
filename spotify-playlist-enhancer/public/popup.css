@@ -1,6 +1,9 @@
 body {
   position: relative; /* Add this line to ensure absolute positioning within the body */
-  background-color: #181818;
+  background-image: url('/images/space_2.jpg'); /* Adjust the path as necessary */
+  background-size: cover; /* Cover the entire page */
+  background-position: fixed;
+  background-repeat: no-repeat; /* Do not repeat the image */
   color: white;
   font-family: Arial, sans-serif;
   padding: 10px;
@@ -22,6 +25,11 @@ body {
   button:hover {
     background-color: #1ed760; /* Lighter green on hover */
   }
+
+  /* Style for the buttons container */
+.buttons-container {
+  margin-bottom: 20px; /* Space below the button container */
+}
 
   #musicPlayerPopup {
     display: none;
@@ -46,8 +54,34 @@ body {
   border-radius: 4px;
   margin-bottom: 5px; /* Adds space between items */
   transition: background-color 0.3s;
+  width: 100%; /* Full width */
+  text-align: left; /* Align text to the left */
 }
+
+/* Style for the audio player container */
+.player-container {
+  width: 100%; /* Full width */
+  margin-bottom: 20px; /* Space below the player */
+}
+
+/* Style for the song list */
+.song-list-container {
+  width: 100%; /* Full width */
+  list-style: armenian;
+  padding: 0;
+  margin: 0;
+}
+
 
 .song-item:hover {
   background-color: #1ed760; /* Lighter green on hover */
+}
+
+/* Add a general style for containers */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: flex-start; /* Align items to the top */
+  width: 100%; /* Take full width */
 }
