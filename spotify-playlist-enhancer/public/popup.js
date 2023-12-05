@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if(musicPlayerPopup.style.display === 'none') {
         musicPlayerPopup.style.display = 'block';
         // Load and list music files here, setting them as the source for the audio player
-        addSongToPopup('songs/MilkyChanceStolenDance.mp3')
+        addSongToPopup('songs/stolen_dance.mp3')
         addSongToPopup('songs/frozen.mp3')
         addSongToPopup('songs/after_dark.mp3')
     } else {
@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
 function addSongToPopup(songPath) {
   var songList = document.getElementById('songList');
   var songItem = document.createElement('li');
-  songItem.textContent = songPath; // Use the file name or some identifier
+  var songName = songPath.split('/').pop().split('.').shift(); // Extract the song name from the path
+  songItem.textContent = songName; // Use just the file name without the extension
+  songItem.className = 'song-item'; // Add a class for styling
   songItem.onclick = function() {
       var audioPlayer = document.getElementById('audioPlayer');
       audioPlayer.src = songPath; // Set the path as the source for the audio player

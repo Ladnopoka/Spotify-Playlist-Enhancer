@@ -33,3 +33,21 @@ body {
     z-index: 10; /* Ensure it's above other elements */
     /* Additional styling */
 }
+
+#songList {
+  list-style: none;
+}
+
+.song-item {
+  cursor: pointer;
+  background-color: #282828;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-bottom: 5px; /* Adds space between items */
+  transition: background-color 0.3s;
+}
+
+.song-item:hover {
+  background-color: #1ed760; /* Lighter green on hover */
+}
