@@ -6,6 +6,12 @@ body {
     padding: 10px;
     text-align: center;
     color: #ffffff; /* Make text color white for better contrast */
+    min-height: 100%; /* At least full screen height */
+    background-attachment: fixed; /* The background will stay fixed during scroll */
+}
+
+html {
+    height: 100%; /* Make sure the html element covers the full height */
 }
 
 .container {
