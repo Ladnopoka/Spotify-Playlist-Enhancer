@@ -3,5 +3,14 @@
   "name": "Spotify Playlist Enhancer",
   "version": "1.0",
   "description": "A better and easier way to manage your Spotify songs and playlists",
-  "permissions": ["activeTab"]
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "192": "logo192.png"
+  }
 }
