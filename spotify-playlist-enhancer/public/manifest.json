@@ -11,6 +11,6 @@
     "service_worker": "background.js"
   },
   "icons": {
-    "192": "spotify_256.png"
+    "192": "/images/spotify_256.png"
   }
 }

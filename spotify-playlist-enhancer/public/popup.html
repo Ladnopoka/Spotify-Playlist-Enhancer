@@ -5,9 +5,25 @@
   <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 <body>
-  <button id="myButton">Open Spotify Playlist Enhancer</button>
-  <button id="myButton2">My Playlists</button>
-  <button id="myButton3">Recent Playlists</button>
+  <div class="container buttons-container">
+    <button id="myButton">Open Spotify Playlist Enhancer</button>
+    <button id="myButton2">My Playlists</button>
+    <button id="myButton3">Recent Playlists</button>
+  </div>
+
+  <!-- This is the new popup div for the music player -->
+  <div class="container player-container" style="display:none;" id="musicPlayerPopup">
+    <audio controls id="audioPlayer">
+        <!-- Audio source will be set dynamically by JavaScript -->
+    </audio>
+  </div>
+
+  <div class="container song-list-container">
+    <ul id="songList">
+        <!-- Song items will be added by JavaScript -->
+    </ul>
+  </div>
+
   <script src="popup.js"></script>
 </body>
 </html>
