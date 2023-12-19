@@ -9,6 +9,7 @@ const REDIRECT_URI = encodeURIComponent('https://eieaapoiogpkcmogppnjpbgccjlklcn
 const SCOPE = encodeURIComponent('user-read-email');
 const SHOW_DIALOG = encodeURIComponent('true');
 let STATE = '';
+let ACCESS_TOKEN = '';
 
 
 let user_signed_in = false;
@@ -47,15 +48,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             sendResponse({ message: 'fail'})
           } else{
             console.log(redirect_url)
-            let access_token = redirect_url.substring(redirect_url.indexOf('access_token=') + 13);
-            access_token = access_token.substring(0, access_token.indexOf('&'));
+            ACCESS_TOKEN = redirect_url.substring(redirect_url.indexOf('access_token=') + 13);
+            ACCESS_TOKEN = ACCESS_TOKEN.substring(0, ACCESS_TOKEN.indexOf('&'));
             let state = redirect_url.substring(redirect_url.indexOf('state=') + 6);
             
 
             if (state == STATE){
-              console.log("SUCCESS!!!")
-              console.log(access_token);
+              console.log("You have successfully signed in!")
+              console.log(ACCESS_TOKEN);
               console.log(state);
+              user_signed_in = true;
+
+              // this is just to dump the token after some time
+              setTimeout(() => {
+                ACCESS_TOKEN = '';
+                user_signed_in = false;
+              }, 3600000)
               // chrome.browserAction.setPopup({ popup: './popup.html' }, () => {
               //   sendResponse({ message: 'success' });
               // });
