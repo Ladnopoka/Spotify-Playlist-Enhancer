@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('myButton4').addEventListener('click', function () {
+    //console.log("button 4 pressed")
+    //chrome.tabs.create({ url: 'login.html' });
     chrome.runtime.sendMessage({ message: 'login' }, function (response) {
       if (response.message === 'success') window.close();
     });

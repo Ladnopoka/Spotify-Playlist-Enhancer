@@ -14,14 +14,13 @@ let user_signed_in = false;
 
 function create_spotify_endpoint() {
   let oauth2_url =
-  `https://accounts.spotify.com/authorize
+    `https://accounts.spotify.com/authorize
 ?client_id=${CLIENT_ID}
 &response_type=${RESPONSE_TYPE}
-&response_uri=${REDIRECT_URI}
-$state=${STATE}
-$scope=${SCOPE}
-$show_dialog=${SHOW_DIALOG}
-`;
+&redirect_uri=${REDIRECT_URI}
+&state=${STATE}
+&scope=${SCOPE}
+&show_dialog=${SHOW_DIALOG}`;
 
   console.log(oauth2_url);
   return oauth2_url;
