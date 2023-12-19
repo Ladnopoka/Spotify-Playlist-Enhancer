@@ -6,13 +6,16 @@
 const CLIENT_ID = encodeURIComponent('61b346139beb4503855eb7be6a217138');
 const RESPONSE_TYPE = encodeURIComponent('token');
 const REDIRECT_URI = encodeURIComponent('https://eieaapoiogpkcmogppnjpbgccjlklcno.chromiumapp.org/');
-const STATE = encodeURIComponent('meet' + Math.random().toString(36).substring(2, 15));
 const SCOPE = encodeURIComponent('user-read-email');
 const SHOW_DIALOG = encodeURIComponent('true');
+let STATE = '';
+
 
 let user_signed_in = false;
 
 function create_spotify_endpoint() {
+  STATE = encodeURIComponent('meet' + Math.random().toString(36).substring(2, 15));
+
   let oauth2_url =
     `https://accounts.spotify.com/authorize
 ?client_id=${CLIENT_ID}
@@ -48,9 +51,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             access_token = access_token.substring(0, access_token.indexOf('&'));
             let state = redirect_url.substring(redirect_url.indexOf('state=') + 6);
             
-            console.log(access_token);
-            console.log(state);
-            //sendResponse({message: 'success'})
+
+            if (state == STATE){
+              console.log("SUCCESS!!!")
+              console.log(access_token);
+              console.log(state);
+              // chrome.browserAction.setPopup({ popup: './popup.html' }, () => {
+              //   sendResponse({ message: 'success' });
+              // });
+              //sendResponse({message: 'success'})
+            } else {
+              sendResponse({ message: 'fail'})
+            }
           }
         }
       });
