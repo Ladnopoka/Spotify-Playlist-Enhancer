@@ -1,5 +1,3 @@
-//import './popup.css';
-
 document.addEventListener('DOMContentLoaded', function () {
 
 
@@ -31,6 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('myButton3').addEventListener('click', function () {
     // Code for "Recent Playlists" button
+  });
+
+  document.getElementById('myButton4').addEventListener('click', function () {
+    chrome.runtime.sendMessage({ message: 'login' }, function (response) {
+      if (response.message === 'success') window.close();
+    });
   });
 
 
