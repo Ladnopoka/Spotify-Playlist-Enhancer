@@ -1,5 +1,5 @@
 var client_id = 'CLIENT_ID';
-var redirect_uri = 'http://localhost:8888/callback';
+var redirect_uri = 'chrome-extension://eieaapoiogpkcmogppnjpbgccjlklcno/login.html';
 
 var app = express();
 
