@@ -6,7 +6,7 @@
 const CLIENT_ID = encodeURIComponent('61b346139beb4503855eb7be6a217138');
 const RESPONSE_TYPE = encodeURIComponent('token');
 const REDIRECT_URI = encodeURIComponent('https://eieaapoiogpkcmogppnjpbgccjlklcno.chromiumapp.org/');
-const SCOPE = encodeURIComponent('user-read-email');
+const SCOPE = encodeURIComponent('user-read-email user-top-read user-library-read playlist-read-private');
 const SHOW_DIALOG = encodeURIComponent('true');
 let STATE = '';
 let ACCESS_TOKEN = '';
@@ -59,6 +59,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               console.log(state);
               user_signed_in = true;
 
+              getTopTracks().then(topTracks => {
+                console.log('Top 5 Tracks:', topTracks);
+              });
+
               // this is just to dump the token after some time
               setTimeout(() => {
                 ACCESS_TOKEN = '';
@@ -86,4 +90,27 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
 });
+
+
+async function getTopTracks() {
+  if (!ACCESS_TOKEN) {
+    console.error('Access Token is missing');
+    return;
+  }
+
+  const response = await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=5', {
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+    method: 'GET'
+  });
+
+  if (!response.ok) {
+    console.error('Failed to fetch top tracks:', response.statusText);
+    return;
+  }
+
+  const data = await response.json();
+  return data.items.map(({ name }) => name);
+}
   

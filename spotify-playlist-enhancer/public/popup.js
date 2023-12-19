@@ -40,7 +40,41 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
+  document.getElementById('myButton5').addEventListener('click', function () {
+    getTopTracks().then(topTracks => {
+      displayTopTracks(topTracks);
+    });
+  });
+
+
 });
+
+// Function to display top tracks in the popup
+function displayTopTracks(topTracks) {
+  const tracksContainer = document.getElementById('tracks-container'); // Make sure you have this container in your HTML
+  tracksContainer.innerHTML = ''; // Clear previous tracks
+
+  topTracks.forEach(track => {
+    const trackElement = document.createElement('p');
+    trackElement.textContent = track; // Assuming track is just a string with the track name
+    tracksContainer.appendChild(trackElement);
+  });
+}
+
+// Placeholder function for getTopTracks, replace with your actual function to get the tracks
+async function getTopTracks() {
+  // Use the code you've written to fetch the top tracks from Spotify
+  // For now, let's return dummy data
+  return [
+    'Appelle Moi (Scott Rill Remix)',
+    'Still (I Got Summer on My Mind)',
+    'Kolkata',
+    'Losing It',
+    'Early Morning Dreams (Kled Mone Remix)'
+  ];
+}
+
+
 
 // Function to add songs to the popup
 function addSongToPopup(songPath) {
