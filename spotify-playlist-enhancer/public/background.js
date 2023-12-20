@@ -91,7 +91,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-
+//the below code just extracts your top songs from Spotify API
 async function getTopTracks() {
   if (!ACCESS_TOKEN) {
     console.error('Access Token is missing');
