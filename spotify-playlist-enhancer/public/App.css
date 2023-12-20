@@ -1,0 +1,195 @@
+App.css
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+body{
+    margin: 0;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.createButton {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+.createButton:hover{
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+.createButton:focus{
+  outline: none;
+}
+.createButton{
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #40e495,
+    #30dd8a,
+    #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+.viewButton {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+.viewButton:hover{
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+.viewButton:focus{
+  outline: none;
+}
+.viewButton{
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #40e495,
+    #30dd8a,
+    #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.squareL, .squareR {
+    position: fixed;
+    top: 50%; /* Center vertically */
+    width: 30%; /* Adjust width as a percentage of the viewport width */
+    height: 50vh; /* Adjust height as a percentage of the viewport height */
+    margin-top: -25vh; /* Offset for vertical centering */
+    border-radius: 25px;
+    border: 4px;
+    box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.2); /* Adjust shadow color and opacity */
+  }
+
+  .squareL {
+    left: 5%; /* Adjust left positioning */
+    outline: 4px solid transparent; /* Remove outline-color and use a transparent border */
+    outline-color: linear-gradient(to bottom, #25aae1, #25aae1, #30dd8a, #2bb673);
+  }
+
+  .squareR {
+    right: 5%; /* Adjust right positioning */
+    outline: 4px solid transparent; /* Remove outline-color and use a transparent border */
+    outline-color: linear-gradient(to bottom, #25aae1, #25aae1, #30dd8a, #2bb673);
+  }
+
+.container {
+    padding: 20px; /* Add padding to create space for text */
+    color: #fff;  /* Set text color */
+    background-color: #282c34;  /* Set background color */
+    border-radius: 10px;  /* Add border-radius for rounded corners */
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75); /* Adjust shadow color and opacity */
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 80px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.arrow {
+  position: absolute;
+  top: 25px;
+  width: 90%;
+  height: 10px;
+  background-color: #fff;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+  animation: arrow 700ms linear infinite;
+}
+
+.arrow::after, .arrow::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 10px;
+  right: -8px;
+  background-color: #fff;
+}
+
+.arrow::after {
+  top: -12px;
+  transform: rotate(45deg);
+}
+
+.arrow::before {
+  top: 12px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+  transform: rotate(-45deg);
+}
