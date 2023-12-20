@@ -39,27 +39,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-
-  document.getElementById('myButton5').addEventListener('click', function () {
-    getTopTracks().then(topTracks => {
-      displayTopTracks(topTracks);
-    });
+  document.getElementById('myButton5').addEventListener('click', async function () {
+    var topTracksPopup = document.getElementById('topTracksPopup');
+    var topTracksList = document.getElementById('topTracksList');
+  
+    // Clear the existing tracks from the list
+    while (topTracksList.firstChild) {
+      topTracksList.removeChild(topTracksList.firstChild);
+    }
+  
+    // Toggle display of the top tracks list
+    if(topTracksPopup.style.display === 'none') {
+      topTracksPopup.style.display = 'block';
+      // Fetch and display top tracks from Spotify
+      const topTracks = await getTopTracks();
+      topTracks.forEach(track => addTrackToPopup(track, topTracksList));
+    } else {
+      topTracksPopup.style.display = 'none';
+    }
   });
-
-
+  
+  function addTrackToPopup(trackName, listElement) {
+    var trackItem = document.createElement('li');
+    trackItem.textContent = trackName; // Just the track name for simplicity
+    listElement.appendChild(trackItem);
+  }
 });
-
-// Function to display top tracks in the popup
-function displayTopTracks(topTracks) {
-  const tracksContainer = document.getElementById('tracks-container'); // Make sure you have this container in your HTML
-  tracksContainer.innerHTML = ''; // Clear previous tracks
-
-  topTracks.forEach(track => {
-    const trackElement = document.createElement('p');
-    trackElement.textContent = track; // Assuming track is just a string with the track name
-    tracksContainer.appendChild(trackElement);
-  });
-}
 
 // Placeholder function for getTopTracks, replace with your actual function to get the tracks
 async function getTopTracks() {
@@ -74,7 +79,18 @@ async function getTopTracks() {
   ];
 }
 
+function displayTopTracks(tracks) {
+  const container = document.getElementById('top-tracks-container');
+  // Clear previous content
+  container.innerHTML = '';
 
+  // Create and append track names to the container
+  tracks.forEach(track => {
+    const trackElement = document.createElement('div');
+    trackElement.textContent = track;
+    container.appendChild(trackElement);
+  });
+}
 
 // Function to add songs to the popup
 function addSongToPopup(songPath) {
