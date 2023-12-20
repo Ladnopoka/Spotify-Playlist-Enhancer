@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="App.css">
+    <title>Your App Title</title>
+    <!-- Add any additional meta tags, stylesheets, or scripts here -->
+</head>
+<body>
+
+    <div class="App">
+        <header class="App-header">
+            <!--
+            <img src="logo.svg" class="App-logo" alt="logo">
+            <p></p>
+            <a class="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+                Learn React
+            </a>
+            -->
+
+            <button class="createButton" onclick="alert('Create Playlist button clicked')">
+                Create Playlist
+            </button>
+            <button class="viewButton" onclick="alert('View Playlists button clicked')">
+                View Playlists
+            </button>
+
+            <div class="container squareL">
+              <p id="leftContainer">Loading...</p>
+            </div>
+            <div class="container squareR">
+              <p id="rightContainer">Loading...</p>
+            </div>
+
+            <div class="icon">
+                <div class="arrow"></div>
+            </div>
+
+        </header>
+    </div>
+
+    <script>
+        // Makes arrow move back and forth on click
+        document.querySelector('.icon').onclick = function () {
+            document.querySelector('.arrow').animate([
+                { left: '0' },
+                { left: '10px' },
+                { left: '0' }
+            ], {
+                duration: 700,
+                iterations: Infinity
+            });
+        };
+
+        // Function to fetch song names from local files
+        function fetchSongNames() {
+            // Replace these paths with the actual paths to your local files
+            const leftSongPath = 'C:/CS322_PROJECT/git-desktop-clone/spotify-api/spotify-playlist-enhancer/build/songs/after_dark.mp3';
+            const rightSongPath = 'C:/CS322_PROJECT/git-desktop-clone/spotify-api/spotify-playlist-enhancer/build/songs/frozen.mp3';
+
+            // Fetch left song name
+            fetch(leftSongPath)
+                .then(response => response.text())
+                .then(songName => {
+                    document.getElementById('leftContainer').textContent = songName;
+                });
+
+            // Fetch right song name
+            fetch(rightSongPath)
+                .then(response => response.text())
+                .then(songName => {
+                    document.getElementById('rightContainer').textContent = songName;
+                });
+        }
+
+        // Call the function to fetch and update song names
+        fetchSongNames();
+    </script>
+
+    <!-- Add any additional scripts here -->
+
+</body>
+</html>

@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('myButton3').addEventListener('click', function () {
     // Code for "Recent Playlists" button
+    chrome.tabs.create({ url: 'App.html' });
   });
 
 
