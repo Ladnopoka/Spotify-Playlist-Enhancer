@@ -4,11 +4,13 @@ body {
   background-size: cover; /* Cover the entire page */
   background-position: relative;
   background-repeat: no-repeat; /* Do not repeat the image */
+  background-attachment: fixed;
   color: white;
   font-family: Arial, sans-serif;
   padding: 10px;
   width: 300px; /* Set a specific width for the body */
   overflow: visible; /* Ensure that overflow content is visible */
+  margin: 0;
 }
   
   button {
@@ -87,6 +89,26 @@ body {
   align-items: center; /* Center items horizontally */
   justify-content: flex-start; /* Align items to the top */
   width: 100%; /* Take full width */
+}
+
+/* Width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #4e4e4e;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #222222;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #222222;
 }
 
 /* #topTracksPopup
