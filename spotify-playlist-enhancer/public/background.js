@@ -26,7 +26,7 @@ function create_spotify_endpoint() {
 &scope=${SCOPE}
 &show_dialog=${SHOW_DIALOG}`;
 
-  console.log(oauth2_url);
+  console.log("OAuth2 URL: " + oauth2_url);
   return oauth2_url;
 }
 
@@ -54,13 +54,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             
 
             if (state == STATE){
-              console.log("You have successfully signed in!")
-              console.log(ACCESS_TOKEN);
-              console.log(state);
+              console.log("You have successfully signed in!\nYour Spotify account is now connected to the App")
+              console.log("ACCESS TOKEN: " + ACCESS_TOKEN);
+              console.log("STATE: " + state);
               user_signed_in = true;
 
               getTopTracks().then(topTracks => {
-                console.log('Top 5 Tracks:', topTracks);
+                console.log('Top 5 Tracks from your Spotify account: ', topTracks);
               });
 
               // this is just to dump the token after some time

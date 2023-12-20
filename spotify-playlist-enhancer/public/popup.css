@@ -2,7 +2,7 @@ body {
   position: relative; /* Add this line to ensure absolute positioning within the body */
   background-image: url('/images/space_2.jpg'); /* Adjust the path as necessary */
   background-size: cover; /* Cover the entire page */
-  background-position: fixed;
+  background-position: relative;
   background-repeat: no-repeat; /* Do not repeat the image */
   color: white;
   font-family: Arial, sans-serif;
@@ -89,11 +89,11 @@ body {
   width: 100%; /* Take full width */
 }
 
-#topTracksPopup
+/* #topTracksPopup
 {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  justify-content: flex-start; /* Align items to the top */
-  width: 100%; /* Take full width */
-}
+  align-items: center;
+  justify-content: flex-start; 
+  width: 100%; 
+} */
