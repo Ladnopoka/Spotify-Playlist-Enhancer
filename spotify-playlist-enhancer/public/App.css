@@ -133,13 +133,13 @@ body{
     border: 4px;
     box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.2); /* Adjust shadow color and opacity */
   }
-  
+
   .squareL {
     left: 5%; /* Adjust left positioning */
     outline: 4px solid transparent; /* Remove outline-color and use a transparent border */
     outline-color: linear-gradient(to bottom, #25aae1, #25aae1, #30dd8a, #2bb673);
   }
-  
+
   .squareR {
     right: 5%; /* Adjust right positioning */
     outline: 4px solid transparent; /* Remove outline-color and use a transparent border */

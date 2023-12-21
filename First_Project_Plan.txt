@@ -20,4 +20,8 @@ How do you plan to divide the work among the team? How will you divide the work 
 
 Jevgenij and Fabian are interested in coding with React.js handling both front-end and back-end development. We plan to callaborate between our front and back end work.
 Fiachra is in charge of UI design and mockups, along with front-end aesthetics like CSS, ensuring that the application is visually appealing and user-friendly.
-When our first version of the app and the UI is set up, we will look into audio and audio components implementation and split the work when the task is more clear.
+When our first version of the app and the UI is set up, we will look into audio and audio components implementation and split the work when the task is more clear. 
+
+
+
+We have established the connection with Spotify API and we get access key that we can use for API calls

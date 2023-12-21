@@ -6,9 +6,14 @@
 </head>
 <body>
   <div class="container buttons-container">
+    <br><br>
     <button id="myButton">Open Spotify Playlist Enhancer</button>
     <button id="myButton2">My Playlists</button>
     <button id="myButton3">Import and Edit</button>
+
+    <br><br>
+    <button id="myButton4">Authorization</button>
+    <button id="myButton5">My Top 5</button>
   </div>
 
   <!-- This is the new popup div for the music player -->
@@ -22,6 +27,10 @@
     <ul id="songList">
         <!-- Song items will be added by JavaScript -->
     </ul>
+  </div>
+
+  <div class="container song-list-container" id="topTracksPopup" style="display: none;">
+    <ul id="topTracksList"></ul>
   </div>
 
   <script src="popup.js"></script>
