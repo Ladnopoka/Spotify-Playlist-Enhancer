@@ -94,6 +94,25 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+//Need this event listener to listen for messages from popup.js
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.message === "getTopTracks") {
+      getTopTracks().then(tracks => {
+        sendResponse({ topTracks: tracks });
+      }).catch(error => {
+        console.error('Error fetching top tracks:', error);
+        sendResponse({ error: error.message });
+      });
+      return true; // Return true to indicate you wish to send a response asynchronously
+    }
+  }
+);
+
+function getTopTracks() {
+  // Your code to get top tracks
+}
+
 //the below code just extracts your top songs from Spotify API
 async function getTopTracks() {
   if (!ACCESS_TOKEN) {

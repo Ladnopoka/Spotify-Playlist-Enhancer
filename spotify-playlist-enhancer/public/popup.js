@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+  let isTracksVisible = false; // State to track if tracks are currently shown
 
 
   document.getElementById('myButton').addEventListener('click', function () {
@@ -53,10 +54,29 @@ document.addEventListener('DOMContentLoaded', function () {
     if(topTracksPopup.style.display === 'none') {
       topTracksPopup.style.display = 'block';
       // Fetch and display top tracks from Spotify
-      const topTracks = await getTopTracks();
+      const topTracks = await getRandomTracks();
       topTracks.forEach(track => addTrackToPopup(track, topTracksList));
     } else {
       topTracksPopup.style.display = 'none';
+    }
+  });
+
+  document.getElementById('myButton6').addEventListener('click', function() {
+    if (!isTracksVisible) {
+      chrome.runtime.sendMessage({message: "getTopTracks"}, function(response) {
+          if (response.error) {
+              console.error('Error:', response.error);
+              // Display the error to the user
+          } else if (response.topTracks) {
+              displayTracks(response.topTracks);
+              isTracksVisible = true;
+          }
+      });
+    }else{
+      // If tracks are currently shown, hide them
+      const container = document.getElementById('tracks-container');
+      container.innerHTML = ''; // Clear the tracks
+      isTracksVisible = false; // Update state
     }
   });
   
@@ -67,14 +87,23 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+function displayTracks(tracks) {
+  const container = document.getElementById('tracks-container');
+  container.innerHTML = ''; // Clear previous results
+  tracks.forEach(track => {
+      const trackElement = document.createElement('div');
+      trackElement.textContent = track;
+      container.appendChild(trackElement);
+  });
+}
 
-async function getTopTracks() {
+async function getRandomTracks() {
   return [
-    'Appelle Moi (Scott Rill Remix)',
-    'Still (I Got Summer on My Mind)',
-    'Kolkata',
-    'Losing It',
-    'Early Morning Dreams (Kled Mone Remix)'
+    'Song 1',
+    'Song 2',
+    'Song 3',
+    'Song 4',
+    'Song 5'
   ];
 }
 
