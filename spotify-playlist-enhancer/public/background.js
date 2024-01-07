@@ -11,9 +11,10 @@ const SHOW_DIALOG = encodeURIComponent('true');
 let STATE = '';
 let ACCESS_TOKEN = '';
 
-
+//so that user can't authorize multiple times
 let user_signed_in = false;
 
+//create endpoint code taken from official spotify dev site
 function create_spotify_endpoint() {
   STATE = encodeURIComponent('meet' + Math.random().toString(36).substring(2, 15));
 
@@ -30,6 +31,7 @@ function create_spotify_endpoint() {
   return oauth2_url;
 }
 
+//also taken from spotify dev website, generates access tokens and states
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'login') {
     if (user_signed_in)
@@ -52,7 +54,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             ACCESS_TOKEN = ACCESS_TOKEN.substring(0, ACCESS_TOKEN.indexOf('&'));
             let state = redirect_url.substring(redirect_url.indexOf('state=') + 6);
             
-
+            //I've put extra print statements here so you can see all the access tokens and states printed and you can use
             if (state == STATE){
               console.log("You have successfully signed in!\nYour Spotify account is now connected to the App")
               console.log("ACCESS TOKEN: " + ACCESS_TOKEN);
@@ -81,6 +83,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     return true;
+    //if you want to log out
   } else if (request.message === 'logout') {
     user_signed_in = false;
     chrome.browserAction.setPopup({ popup: './popup.html' }, () => {
