@@ -67,10 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// Placeholder function for getTopTracks, replace with your actual function to get the tracks
+
 async function getTopTracks() {
-  // Use the code you've written to fetch the top tracks from Spotify
-  // For now, let's return dummy data
   return [
     'Appelle Moi (Scott Rill Remix)',
     'Still (I Got Summer on My Mind)',
