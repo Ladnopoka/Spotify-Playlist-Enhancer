@@ -42,22 +42,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('myButton5').addEventListener('click', async function () {
-    var topTracksPopup = document.getElementById('topTracksPopup');
-    var topTracksList = document.getElementById('topTracksList');
-  
-    // Clear the existing tracks from the list
-    while (topTracksList.firstChild) {
-      topTracksList.removeChild(topTracksList.firstChild);
-    }
-  
-    // Toggle display of the top tracks list
-    if(topTracksPopup.style.display === 'none') {
-      topTracksPopup.style.display = 'block';
-      // Fetch and display top tracks from Spotify
-      const topTracks = await getRandomTracks();
-      topTracks.forEach(track => addTrackToPopup(track, topTracksList));
-    } else {
-      topTracksPopup.style.display = 'none';
+    if (!isTracksVisible) {
+      chrome.runtime.sendMessage({message: "getTopTracks"}, function(response) {
+          if (response.error) {
+              console.error('Error:', response.error);
+              // Display the error to the user
+          } else if (response.topTracks) {
+              displayTracks(response.topTracks);
+              isTracksVisible = true;
+          }
+      });
+    }else{
+      // If tracks are currently shown, hide them
+      const container = document.getElementById('tracks-container');
+      container.innerHTML = ''; // Clear the tracks
+      isTracksVisible = false; // Update state
     }
   });
 
@@ -88,13 +87,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function displayTracks(tracks) {
+  var num = 0;
   const container = document.getElementById('tracks-container');
   container.innerHTML = ''; // Clear previous results
   tracks.forEach(track => {
       const trackElement = document.createElement('div');
-      trackElement.textContent = track;
+      trackElement.textContent = ++num + ".  " + track;
       container.appendChild(trackElement);
   });
+  num = 0;
 }
 
 async function getRandomTracks() {

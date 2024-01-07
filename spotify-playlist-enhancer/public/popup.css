@@ -1,8 +1,8 @@
 /* Wrapper with a fixed size and background */
 #popup-wrapper {
   position: relative;
-  width: 300px; /* Adjust as needed */
-  height: 600px; /* Adjust as needed */
+  width: 350px; /* Adjust as needed */
+  height: 400px; /* Adjust as needed */
   background-image: url('/images/space_2.jpg');
   background-size: cover;
   background-position: center;
