@@ -118,6 +118,23 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    // Existing listeners...
+
+    // Listener for playlist creation
+    if (request.message === "createPlaylist") {
+      createPlaylist(request.tracksUri).then(playlist => {
+        sendResponse({ playlist: playlist });
+      }).catch(error => {
+        console.error('Error creating playlist:', error);
+        sendResponse({ error: error.message });
+      });
+      return true; // Return true for asynchronous response
+    }
+  }
+);
+
 //the below code just extracts your top songs from Spotify API
 async function getTopTracks() {
   if (!ACCESS_TOKEN) {
@@ -138,10 +155,11 @@ async function getTopTracks() {
   }
 
   const data = await response.json();
-  //I'm mapping through the items array from the response and rreturning an object for each track that includes id, name, artist name.
+  //I'm mapping through the items array from the response and rreturning an object for each track that includes id, name, artist name and track uri.
   return data.items.map(track => ({
     id: track.id, // Extracting the ID
     name: track.name, // Extracting the name 
+    uri: track.uri
     //artists: track.artists.map(artist => artist.name).join(', ') // Extracting artist names and joining them with a comma
     //artist is a bit mor complicated, disabled for now.
   }));
@@ -166,8 +184,27 @@ async function getRecommendations(topTracksIds) {
 
   const data = await response.json();
   return data.tracks.map(track => ({
+    id: track.id,
     name: track.name,
-    artists: track.artists.map(artist => artist.name).join(', ')
+    uri: track.uri
   }));
+}
+
+async function createPlaylist(tracksUri) {
+  // Fetch user's Spotify ID
+  const userData = await fetchWebApi('me', 'GET');
+  const userId = userData.id;
+
+  // Create a new playlist
+  const playlist = await fetchWebApi(`users/${userId}/playlists`, 'POST', {
+    name: "My Recommendation Playlist",
+    description: "Playlist created by my Chrome extension",
+    public: false
+  });
+
+  // Add tracks to the playlist
+  await fetchWebApi(`playlists/${playlist.id}/tracks`, 'POST', { uris: tracksUri });
+
+  return playlist;
 }
   

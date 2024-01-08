@@ -1,3 +1,5 @@
+let allTrackUris = []; // Global array to store track URIs
+
 document.addEventListener('DOMContentLoaded', function () {
   let isTracksVisible = false; // State to track if tracks are currently shown
 
@@ -80,6 +82,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  document.getElementById('generate_playlist_button').addEventListener('click', function () {
+    if (allTrackUris.length > 0) {
+      chrome.runtime.sendMessage({ message: "createPlaylist", tracksUri: allTrackUris }, function(response) {
+        if (response.error) {
+          console.error('Error:', response.error);
+        } else if (response.playlist) {
+          console.log('Playlist created:', response.playlist.name, response.playlist.id);
+          // Reset the track URIs array after creating the playlist
+          allTrackUris = [];
+        }
+      });
+    } else {
+      console.log("No tracks to add to the playlist.");
+    }
+  });
 });
 
 function displayTracks(tracks) {
@@ -87,6 +105,8 @@ function displayTracks(tracks) {
   container.innerHTML = ''; // Clear previous results
 
   tracks.forEach((track, index) => {
+    allTrackUris.push(track.uri); // Store the track URI
+
     const trackElement = document.createElement('div');
     trackElement.textContent = `${index + 1}. ${track.name}`;
     container.appendChild(trackElement);
