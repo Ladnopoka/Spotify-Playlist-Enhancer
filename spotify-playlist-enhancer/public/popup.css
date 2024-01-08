@@ -45,11 +45,11 @@ body {
 }
 
 .container.buttons-container button {
-  font-family: sans-serif;
-  font-size: 20px; /* Adjust as needed */
-  /* Other styles */
+  font-family: Arial, sans-serif; /* Replace Arial with your chosen font */
+  font-size: 18px; /* Adjust as needed */
+  color: white; /* Your text color */
+  text-shadow: 2px 2px 2px black; /* X-offset, Y-offset, blur radius, color */
 }
-
   #musicPlayerPopup {
     display: none;
     position: absolute;
