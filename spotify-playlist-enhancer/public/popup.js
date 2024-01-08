@@ -70,26 +70,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function displayTracks(tracks) {
-  var num = 0;
   const container = document.getElementById('tracks-container');
   container.innerHTML = ''; // Clear previous results
-  tracks.forEach(track => {
-      const trackElement = document.createElement('div');
-      trackElement.textContent = ++num + ".  " + track;
-      container.appendChild(trackElement);
-  });
-  num = 0;
-}
 
-// async function getRandomTracks() {
-//   return [
-//     'Song 1',
-//     'Song 2',
-//     'Song 3',
-//     'Song 4',
-//     'Song 5'
-//   ];
-// }
+  tracks.forEach((track, index) => {
+    const trackElement = document.createElement('div');
+    trackElement.textContent = (index + 1) + ". " + track.name + " (ID: " + track.id + ")";
+    container.appendChild(trackElement);
+  });
+}
 
 function displayTopTracks(tracks) {
   const container = document.getElementById('top-tracks-container');
