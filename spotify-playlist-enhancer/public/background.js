@@ -106,12 +106,17 @@ chrome.runtime.onMessage.addListener(
       });
       return true; // Return true to indicate you wish to send a response asynchronously
     }
+    if (request.message === "getRecommendations") {
+      getRecommendations(request.topTracksIds).then(recommendations => {
+        sendResponse({ recommendations: recommendations });
+      }).catch(error => {
+        console.error('Error fetching recommendations:', error);
+        sendResponse({ error: error.message });
+      });
+      return true; // Return true to indicate you wish to send a response asynchronously
+    }
   }
 );
-
-function getTopTracks() {
-  // Your code to get top tracks
-}
 
 //the below code just extracts your top songs from Spotify API
 async function getTopTracks() {
@@ -139,6 +144,30 @@ async function getTopTracks() {
     name: track.name, // Extracting the name 
     //artists: track.artists.map(artist => artist.name).join(', ') // Extracting artist names and joining them with a comma
     //artist is a bit mor complicated, disabled for now.
+  }));
+}
+
+async function getRecommendations(topTracksIds) {
+  if (!ACCESS_TOKEN) {
+    console.error('Access Token is missing');
+    return;
+  }
+
+  const response = await fetch(`https://api.spotify.com/v1/recommendations?limit=5&seed_tracks=${topTracksIds.join(',')}`, {
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`
+    }
+  });
+
+  if (!response.ok) {
+    console.error('Failed to fetch recommendations:', response.statusText);
+    return;
+  }
+
+  const data = await response.json();
+  return data.tracks.map(track => ({
+    name: track.name,
+    artists: track.artists.map(artist => artist.name).join(', ')
   }));
 }
   

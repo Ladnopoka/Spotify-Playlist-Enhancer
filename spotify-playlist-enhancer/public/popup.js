@@ -64,8 +64,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  document.getElementById('myButton5').addEventListener('click', function() {
-    //functionality for 6th button
+  document.getElementById('recommendations_button').addEventListener('click', async () => {
+    chrome.runtime.sendMessage({ message: "getTopTracks" }, function(response) {
+      if (response.error) {
+        console.error('Error:', response.error);
+      } else if (response.topTracks) {
+        const topTracksIds = response.topTracks.map(track => track.id);
+        chrome.runtime.sendMessage({ message: "getRecommendations", topTracksIds: topTracksIds }, function(recommendationResponse) {
+          if (recommendationResponse.error) {
+            console.error('Error:', recommendationResponse.error);
+          } else if (recommendationResponse.recommendations) {
+            displayTracks(recommendationResponse.recommendations);
+          }
+        });
+      }
+    });
   });
 });
 
@@ -75,7 +88,7 @@ function displayTracks(tracks) {
 
   tracks.forEach((track, index) => {
     const trackElement = document.createElement('div');
-    trackElement.textContent = (index + 1) + ". " + track.name + " (ID: " + track.id + ")";
+    trackElement.textContent = `${index + 1}. ${track.name}`;
     container.appendChild(trackElement);
   });
 }
