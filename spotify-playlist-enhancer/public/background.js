@@ -6,7 +6,7 @@
 const CLIENT_ID = encodeURIComponent('61b346139beb4503855eb7be6a217138');
 const RESPONSE_TYPE = encodeURIComponent('token');
 const REDIRECT_URI = encodeURIComponent('https://eieaapoiogpkcmogppnjpbgccjlklcno.chromiumapp.org/');
-const SCOPE = encodeURIComponent('user-read-email user-top-read user-library-read playlist-read-private');
+const SCOPE = encodeURIComponent('user-read-email user-top-read user-library-read playlist-read-private playlist-modify-public playlist-modify-private');
 const SHOW_DIALOG = encodeURIComponent('true');
 let STATE = '';
 let ACCESS_TOKEN = '';
@@ -85,7 +85,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
     //if you want to log out
   } else if (request.message === 'logout') {
-    user_signed_in = false;
+    user_signed_in = false; 
     chrome.browserAction.setPopup({ popup: './popup.html' }, () => {
       sendResponse({ message: 'success' });
     });
@@ -191,19 +191,62 @@ async function getRecommendations(topTracksIds) {
 }
 
 async function createPlaylist(tracksUri) {
+  if (!ACCESS_TOKEN) {
+    console.error('Access Token is missing');
+    return;
+  }
+
   // Fetch user's Spotify ID
-  const userData = await fetchWebApi('me', 'GET');
+  const userResponse = await fetch('https://api.spotify.com/v1/me', {
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`
+    }
+  });
+
+  if (!userResponse.ok) {
+    console.error('Failed to fetch user data:', userResponse.statusText);
+    return;
+  }
+
+  const userData = await userResponse.json();
   const userId = userData.id;
 
   // Create a new playlist
-  const playlist = await fetchWebApi(`users/${userId}/playlists`, 'POST', {
-    name: "My Recommendation Playlist",
-    description: "Playlist created by my Chrome extension",
-    public: false
+  const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: "My Recommendation Playlist",
+      description: "Playlist created by my Spotify Playlist Enhancer!",
+      public: false
+    })
   });
 
+  if (!playlistResponse.ok) {
+    const errorDetails = await playlistResponse.json(); // Get more details about the error
+    console.error('Failed to create playlist:', playlistResponse.statusText, errorDetails);
+    return;
+  }
+
+  const playlist = await playlistResponse.json();
+
   // Add tracks to the playlist
-  await fetchWebApi(`playlists/${playlist.id}/tracks`, 'POST', { uris: tracksUri });
+  const addTracksResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ uris: tracksUri })
+  });
+
+  if (!addTracksResponse.ok) {
+    console.error('Failed to add tracks to playlist:', addTracksResponse.statusText);
+    return;
+  }
 
   return playlist;
 }
