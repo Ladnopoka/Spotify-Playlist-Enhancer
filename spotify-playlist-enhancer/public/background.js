@@ -133,6 +133,12 @@ async function getTopTracks() {
   }
 
   const data = await response.json();
-  return data.items.map(({ name }) => name);
+  //I'm mapping through the items array from the response and rreturning an object for each track that includes id, name, artist name.
+  return data.items.map(track => ({
+    id: track.id, // Extracting the ID
+    name: track.name, // Extracting the name 
+    //artists: track.artists.map(artist => artist.name).join(', ') // Extracting artist names and joining them with a comma
+    //artist is a bit mor complicated, disabled for now.
+  }));
 }
   

@@ -44,6 +44,12 @@ body {
   margin-bottom: 20px; /* Space below the button container */
 }
 
+.container.buttons-container button {
+  font-family: sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  /* Other styles */
+}
+
   #musicPlayerPopup {
     display: none;
     position: absolute;

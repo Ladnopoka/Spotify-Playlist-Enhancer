@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
           } else if (response.topTracks) {
               displayTracks(response.topTracks);
               isTracksVisible = true;
+
+              response.topTracks.forEach(track => {
+                console.log(`Track ID: ${track.id}, \nTrack Name: ${track.name}`);
+              });
           }
       });
     }else{
@@ -60,30 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  document.getElementById('myButton6').addEventListener('click', function() {
-    if (!isTracksVisible) {
-      chrome.runtime.sendMessage({message: "getTopTracks"}, function(response) {
-          if (response.error) {
-              console.error('Error:', response.error);
-              // Display the error to the user
-          } else if (response.topTracks) {
-              displayTracks(response.topTracks);
-              isTracksVisible = true;
-          }
-      });
-    }else{
-      // If tracks are currently shown, hide them
-      const container = document.getElementById('tracks-container');
-      container.innerHTML = ''; // Clear the tracks
-      isTracksVisible = false; // Update state
-    }
+  document.getElementById('myButton5').addEventListener('click', function() {
+    //functionality for 6th button
   });
-  
-  function addTrackToPopup(trackName, listElement) {
-    var trackItem = document.createElement('li');
-    trackItem.textContent = trackName; // Just the track name for simplicity
-    listElement.appendChild(trackItem);
-  }
 });
 
 function displayTracks(tracks) {
@@ -98,15 +81,15 @@ function displayTracks(tracks) {
   num = 0;
 }
 
-async function getRandomTracks() {
-  return [
-    'Song 1',
-    'Song 2',
-    'Song 3',
-    'Song 4',
-    'Song 5'
-  ];
-}
+// async function getRandomTracks() {
+//   return [
+//     'Song 1',
+//     'Song 2',
+//     'Song 3',
+//     'Song 4',
+//     'Song 5'
+//   ];
+// }
 
 function displayTopTracks(tracks) {
   const container = document.getElementById('top-tracks-container');
