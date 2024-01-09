@@ -140,6 +140,7 @@ body {
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for hover effects */
+  font-size: 20px; 
 }
 
 .track-item:hover {

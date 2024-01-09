@@ -88,7 +88,16 @@ function displayTracks(tracks) {
     allTrackUris.push(track.uri); // Store the track URI
 
     const trackElement = document.createElement('div');
+    trackElement.className = 'track-item'; // Apply card styling
+  
+    // Create and append track title to the card
+    const trackTitle = document.createElement('div');
+    trackTitle.className = 'track-title';
     trackElement.textContent = `${index + 1}. ${track.name}`;
+
+    // Append title to the card
+    trackElement.appendChild(trackTitle);
+    // Append the card to the container
     container.appendChild(trackElement);
   });
 }
