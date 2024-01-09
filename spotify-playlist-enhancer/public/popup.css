@@ -128,3 +128,30 @@ body {
   background: #222222;
 }
 
+#tracks-container {
+  font-family: 'Roboto', sans-serif; /* or any other font from Google Fonts */
+}
+
+.track-item {
+  background-color: #282828; /* Dark theme card */
+  color: #fff; /* White text */
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for hover effects */
+}
+
+.track-item:hover {
+  transform: translateY(-3px); /* Slight lift */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.track-title {
+  font-size: 18px; /* Larger font size for the title */
+  font-weight: bold; /* Bold for emphasis */
+}
+
+.track-artist {
+  font-size: 14px; /* Smaller font size for the artist */
+}
