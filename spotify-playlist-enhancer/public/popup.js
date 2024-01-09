@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function () {
           console.error('Error:', response.error);
         } else if (response.playlist) {
           console.log('Playlist created:', response.playlist.name, response.playlist.id);
+          showSpotifyPlayer(response.playlist.id);
+
           // Reset the track URIs array after creating the playlist
           allTrackUris = [];
         }
@@ -139,4 +141,21 @@ function addSongToPopup(songPath) {
       audioPlayer.play(); // Play the song
   };
   songList.appendChild(songItem);
+}
+
+// After the playlist is created
+function showSpotifyPlayer(playlistId) {
+  const playerContainer = document.getElementById('spotifyPlayerContainer');
+  playerContainer.innerHTML = ''; // Clear previous content
+
+  const iframe = document.createElement('iframe');
+  iframe.title = "CS322 Inspired Playlist";
+  iframe.src = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=0`;
+  iframe.width = "410";
+  iframe.height = "500"; // Adjust height as needed
+  iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+  iframe.loading = "lazy";
+  //iframe.style.minHeight = '460px'; // Adjust style as needed
+
+  playerContainer.appendChild(iframe);
 }

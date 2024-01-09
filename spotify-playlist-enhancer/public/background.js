@@ -219,7 +219,7 @@ async function createPlaylist(tracksUri) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: "New Recommended Playlist",
+      name: "CS322 Inspired Playlist",
       description: "Playlist created by Spotify Playlist Enhancer based on your top 5 tracks and also 5 recommended tracks!",
       public: false
     })
