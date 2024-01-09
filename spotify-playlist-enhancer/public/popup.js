@@ -93,19 +93,6 @@ function displayTracks(tracks) {
   });
 }
 
-function displayTopTracks(tracks) {
-  const container = document.getElementById('top-tracks-container');
-  // Clear previous content
-  container.innerHTML = '';
-
-  // Create and append track names to the container
-  tracks.forEach(track => {
-    const trackElement = document.createElement('div');
-    trackElement.textContent = track;
-    container.appendChild(trackElement);
-  });
-}
-
 // Function to add songs to the popup
 function addSongToPopup(songPath) {
   var songList = document.getElementById('songList');
