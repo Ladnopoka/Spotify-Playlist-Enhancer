@@ -15,5 +15,8 @@
   },
   "icons": {
     "192": "/images/spotify_256.png"
-  }
+  },
+  "host_permissions": [
+    "https://open.spotify.com/*"
+]
 }

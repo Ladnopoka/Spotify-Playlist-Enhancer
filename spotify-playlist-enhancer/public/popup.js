@@ -1,31 +1,12 @@
+let allTrackUris = []; // Global array to store track URIs
+
 document.addEventListener('DOMContentLoaded', function () {
+  let isTracksVisible = false; // State to track if tracks are currently shown
 
 
   document.getElementById('myButton').addEventListener('click', function () {
     chrome.tabs.create({ url: 'login.html' });
   });
-
-
-  document.getElementById('myButton2').addEventListener('click', function () {
-    var musicPlayerPopup = document.getElementById('musicPlayerPopup');
-    var songList = document.getElementById('songList');
-
-    // Clear the existing songs from the list
-    while (songList.firstChild) {
-      songList.removeChild(songList.firstChild);
-   }
-
-    if(musicPlayerPopup.style.display === 'none') {
-        musicPlayerPopup.style.display = 'block';
-        // Load and list music files here, setting them as the source for the audio player
-        addSongToPopup('songs/stolen_dance.mp3')
-        addSongToPopup('songs/frozen.mp3')
-        addSongToPopup('songs/after_dark.mp3')
-    } else {
-        musicPlayerPopup.style.display = 'none';
-    }
-  });
-
 
   document.getElementById('myButton3').addEventListener('click', function () {
     // Code for "Recent Playlists" button
@@ -41,54 +22,82 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('myButton5').addEventListener('click', async function () {
-    var topTracksPopup = document.getElementById('topTracksPopup');
-    var topTracksList = document.getElementById('topTracksList');
-  
-    // Clear the existing tracks from the list
-    while (topTracksList.firstChild) {
-      topTracksList.removeChild(topTracksList.firstChild);
-    }
-  
-    // Toggle display of the top tracks list
-    if(topTracksPopup.style.display === 'none') {
-      topTracksPopup.style.display = 'block';
-      // Fetch and display top tracks from Spotify
-      const topTracks = await getTopTracks();
-      topTracks.forEach(track => addTrackToPopup(track, topTracksList));
-    } else {
-      topTracksPopup.style.display = 'none';
+    if (!isTracksVisible) {
+      chrome.runtime.sendMessage({message: "getTopTracks"}, function(response) {
+          if (response.error) {
+              console.error('Error:', response.error);
+              // Display the error to the user
+          } else if (response.topTracks) {
+              displayTracks(response.topTracks);
+              isTracksVisible = true;
+
+              response.topTracks.forEach(track => {
+                console.log(`Track ID: ${track.id}, \nTrack Name: ${track.name}`);
+              });
+          }
+      });
+    }else{
+      // If tracks are currently shown, hide them
+      const container = document.getElementById('tracks-container');
+      container.innerHTML = ''; // Clear the tracks
+      isTracksVisible = false; // Update state
     }
   });
-  
-  function addTrackToPopup(trackName, listElement) {
-    var trackItem = document.createElement('li');
-    trackItem.textContent = trackName; // Just the track name for simplicity
-    listElement.appendChild(trackItem);
-  }
+
+  document.getElementById('recommendations_button').addEventListener('click', async () => {
+    chrome.runtime.sendMessage({ message: "getTopTracks" }, function(response) {
+      if (response.error) {
+        console.error('Error:', response.error);
+      } else if (response.topTracks) {
+        const topTracksIds = response.topTracks.map(track => track.id);
+        chrome.runtime.sendMessage({ message: "getRecommendations", topTracksIds: topTracksIds }, function(recommendationResponse) {
+          if (recommendationResponse.error) {
+            console.error('Error:', recommendationResponse.error);
+          } else if (recommendationResponse.recommendations) {
+            displayTracks(recommendationResponse.recommendations);
+          }
+        });
+      }
+    });
+  });
+
+  document.getElementById('generate_playlist_button').addEventListener('click', function () {
+    if (allTrackUris.length > 0) {
+      chrome.runtime.sendMessage({ message: "createPlaylist", tracksUri: allTrackUris }, function(response) {
+        if (response.error) {
+          console.error('Error:', response.error);
+        } else if (response.playlist) {
+          console.log('Playlist created:', response.playlist.name, response.playlist.id);
+          showSpotifyPlayer(response.playlist.id);
+
+          // Reset the track URIs array after creating the playlist
+          allTrackUris = [];
+        }
+      });
+    } else {
+      console.log("No tracks to add to the playlist.");
+    }
+  });
 });
 
-// Placeholder function for getTopTracks, replace with your actual function to get the tracks
-async function getTopTracks() {
-  // Use the code you've written to fetch the top tracks from Spotify
-  // For now, let's return dummy data
-  return [
-    'Appelle Moi (Scott Rill Remix)',
-    'Still (I Got Summer on My Mind)',
-    'Kolkata',
-    'Losing It',
-    'Early Morning Dreams (Kled Mone Remix)'
-  ];
-}
+function displayTracks(tracks) {
+  const container = document.getElementById('tracks-container');
+  container.innerHTML = ''; // Clear previous results
 
-function displayTopTracks(tracks) {
-  const container = document.getElementById('top-tracks-container');
-  // Clear previous content
-  container.innerHTML = '';
+  tracks.forEach((track, index) => {
+    allTrackUris.push(track.uri); // Store the track URI
 
-  // Create and append track names to the container
-  tracks.forEach(track => {
     const trackElement = document.createElement('div');
-    trackElement.textContent = track;
+    trackElement.className = 'track-item'; // Apply card styling
+  
+    // Create and append track title to the card
+    const trackTitle = document.createElement('div');
+    trackTitle.className = 'track-title';
+    trackElement.textContent = `${index + 1}. ${track.name}`;
+
+    // Append title to the card
+    trackElement.appendChild(trackTitle);
+    // Append the card to the container
     container.appendChild(trackElement);
   });
 }
@@ -106,4 +115,21 @@ function addSongToPopup(songPath) {
       audioPlayer.play(); // Play the song
   };
   songList.appendChild(songItem);
+}
+
+// After the playlist is created
+function showSpotifyPlayer(playlistId) {
+  const playerContainer = document.getElementById('spotifyPlayerContainer');
+  playerContainer.innerHTML = ''; // Clear previous content
+
+  const iframe = document.createElement('iframe');
+  iframe.title = "CS322 Inspired Playlist";
+  iframe.src = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=0`;
+  iframe.width = "410";
+  iframe.height = "550"; 
+  iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+  iframe.loading = "lazy";
+  //iframe.style.minHeight = '460px';
+
+  playerContainer.appendChild(iframe);
 }
