@@ -8,28 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     chrome.tabs.create({ url: 'login.html' });
   });
 
-
-  document.getElementById('myButton2').addEventListener('click', function () {
-    var musicPlayerPopup = document.getElementById('musicPlayerPopup');
-    var songList = document.getElementById('songList');
-
-    // Clear the existing songs from the list
-    while (songList.firstChild) {
-      songList.removeChild(songList.firstChild);
-   }
-
-    if(musicPlayerPopup.style.display === 'none') {
-        musicPlayerPopup.style.display = 'block';
-        // Load and list music files here, setting them as the source for the audio player
-        addSongToPopup('songs/stolen_dance.mp3')
-        addSongToPopup('songs/frozen.mp3')
-        addSongToPopup('songs/after_dark.mp3')
-    } else {
-        musicPlayerPopup.style.display = 'none';
-    }
-  });
-
-
   document.getElementById('myButton3').addEventListener('click', function () {
     // Code for "Recent Playlists" button
     chrome.tabs.create({ url: 'App.html' });
@@ -152,10 +130,10 @@ function showSpotifyPlayer(playlistId) {
   iframe.title = "CS322 Inspired Playlist";
   iframe.src = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=0`;
   iframe.width = "410";
-  iframe.height = "500"; // Adjust height as needed
+  iframe.height = "550"; 
   iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
   iframe.loading = "lazy";
-  //iframe.style.minHeight = '460px'; // Adjust style as needed
+  //iframe.style.minHeight = '460px';
 
   playerContainer.appendChild(iframe);
 }
