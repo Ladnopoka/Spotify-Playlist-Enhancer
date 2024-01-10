@@ -17,3 +17,5 @@ To install the extension into your google chrome, follow these steps.
 6. A couple of new buttons appear, select "Load unpacked"
 7. Select the build folder that you created in step 2
 8. The extension now appears in your extensions, enable it and you will have the icon in extensions (top left corner)
+
+The demonstration of the application can be viewed here: https://www.youtube.com/watch?v=NTn2MuQhe8Q
