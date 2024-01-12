@@ -5,7 +5,7 @@
 
 const CLIENT_ID = encodeURIComponent('61b346139beb4503855eb7be6a217138');
 const RESPONSE_TYPE = encodeURIComponent('token');
-const REDIRECT_URI = encodeURIComponent('https://eieaapoiogpkcmogppnjpbgccjlklcno.chromiumapp.org/');
+const REDIRECT_URI = encodeURIComponent('https://nhfabiffbekkpcndmilgnaofppjngemg.chromiumapp.org/');
 const SCOPE = encodeURIComponent('user-read-email user-top-read user-library-read playlist-read-private playlist-modify-public playlist-modify-private');
 const SHOW_DIALOG = encodeURIComponent('true');
 let STATE = '';
