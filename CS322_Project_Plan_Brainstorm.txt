@@ -1,0 +1,27 @@
+What was the inspiration for the project? Is there a similar application or project online / available? If so, how will yours be different/unique? 
+
+Our team was inspired by Spotify as we all use it, but there are a couple of features missing that we think are quite useful.
+Spotify does not have a native feature to merge multiple playlists directly within the app​​. There are ways to do it, but they are time consuming and require some effort.
+Existing methods involve manually copying songs or using third-party tools like Spotify Playlist Merger, which can be cumbersome or not well-known to many users​​​​​​.
+Our application aims to simplify the process of merging multiple playlists into one, making it a more seamless experience. 
+This can especially stand out by providing a better user interface or additional features like removing duplicates or suggesting additions based on the user's listening habits.
+
+
+
+Which programming framework/library/code language do you plan to use? 
+
+We plan to use React.js for both the front-end and back-end, leveraging its capabilities for a dynamic and responsive user interface.
+This was an easy decision, as React is quite popular right now and it fits perfectly with what we want to achieve with our application.
+React skills are also highly valued a lot by employers nowadays, so it would be a great practice for us before we go into the work industry.
+
+
+
+How do you plan to divide the work among the team? How will you divide the work between the UI design/implementation and audio components implementation?
+
+Jevgenij and Fabian are interested in coding with React.js handling both front-end and back-end development. We plan to callaborate between our front and back end work.
+Fiachra is in charge of UI design and mockups, along with front-end aesthetics like CSS, ensuring that the application is visually appealing and user-friendly.
+When our first version of the app and the UI is set up, we will look into audio and audio components implementation and split the work when the task is more clear. 
+
+
+
+We have established the connection with Spotify API and we get access key that we can use for API calls
