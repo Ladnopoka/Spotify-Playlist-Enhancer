@@ -4,7 +4,8 @@ This extension also allows you to retrieve your top 5 played tracks, and give yo
 Finally, you can generate a Spotify playlist with the songs that were recommended to you, and play these songs inside the extension right there and now.
 When the playlists are generated, they are added to your Spotify account, however, in the extension UI, you can select to not keep the playlist if you don't like it after listening to the recommended songs.<br><br>
 
-The demonstration of the application can be viewed here: https://www.youtube.com/watch?v=NTn2MuQhe8Q
+The demonstration of the application can be viewed below:
+[![Watch the video](https://img.youtube.com/vi/NTn2MuQhe8Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=NTn2MuQhe8Q)
 
 # Features
 * **Authenticate Spotify Account**: Securely connect your Spotify account to the extension.<br>
